@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ToggleButton
+        android:id="@+id/tg1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_baseline_lock_open_24"
+        android:gravity="center"
+        android:textOff=""
+        android:textOn=""></ToggleButton>
+</FrameLayout>
+package com.example.toggle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ToggleButton tg = findViewById(R.id.tg1);
+        tg.setOnClickListener(view->{
+            if(tg.isChecked()){
+                tg.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_baseline_lock_open_24));
+                Toast.makeText(getApplicationContext(),"Locked",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                tg.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_baseline_lock_24));
+                Toast.makeText(getApplicationContext(),"Lock Opened ",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+}
