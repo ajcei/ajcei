@@ -1,16 +1,134 @@
-### Hi there 👋
+QS.Login
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50sp"
+    android:background="#B2285573"
+    android:orientation="vertical"
+    android:gravity="top|center"
+    tools:context=".MainActivity">
 
-<!--
-**ajcei/ajcei** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="150dp"/>
 
-Here are some ideas to get you started:
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="start"
+        android:gravity="center"
+        android:hint="usrename"
+        android:inputType="text"
+        android:thickness="0dp"
+        android:shape="rectangle"
+        android:width="3dp"
+        android:color="#4799E8"
+        android:startColor="#C8C8C8"
+        android:endColor="#FFFFFF"
+        android:type="linear"
+        android:angle="270"/>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="start"
+        android:gravity="center"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:thickness="0dp"
+        android:shape="rectangle"
+        android:width="3dp"
+        android:color="#4799E8"
+        android:startColor="#C8C8C8"
+        android:endColor="#FFFFFF"
+        android:type="linear"
+        android:angle="270"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_login"
+        android:text="Sign in"
+        android:textSize="15sp"
+        android:textAlignment="center"/>
+</LinearLayout>
+package com.example.validation;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EditText un = findViewById(R.id.et_username);
+        EditText ps = (EditText) findViewById(R.id.et_password);
+        Button btn = (Button) findViewById(R.id.btn_login);
+
+
+        btn.setOnClickListener(view -> {
+            String uname = un.getText().toString();
+            String pswd = ps.getText().toString();
+            String specialCharRegex= ".*[@#!$%^&+=].*";
+            String UpperCaseRegex= ".*[A-Z].*";
+            String NumberRegex= ".*[0-9].*";
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+            if (uname.length()==0)
+            {
+                un.setError("user name not to be null");
+            }
+            else if(!uname.matches(emailPattern)){
+                un.setError(" provided email is invalid");
+            }
+
+            else if(pswd.length() == 0) {
+                ps.setError("password not to be null");
+            }
+            else if((!pswd.matches(specialCharRegex)) && (!pswd.matches(UpperCaseRegex))&& (!pswd.matches(NumberRegex))){
+                ps.setError("include Special character and uppercase");
+            }
+            else
+            {
+                if (uname.equals("reshma@gmail.com") && pswd.equals("Reshma@123")) {
+                    Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+
+                } else if (uname != ("reshma@gmail.com") && pswd.equals("Reshma@123")) {
+                    Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT).show();
+                } else if (uname.equals("reshma@gmail.com") && pswd != ("Reshma@123")) {
+                    Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Invalid username and password", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        });
+    }
+}
