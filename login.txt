@@ -115,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                if (uname.equals("reshma@gmail.com") && pswd.equals("Reshma@123")) {
+                if (uname.equals("ajce@gmail.com") && pswd.equals("Ajce@123")) {
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
 
-                } else if (uname != ("reshma@gmail.com") && pswd.equals("Reshma@123")) {
+                } else if (uname != ("ajce@gmail.com") && pswd.equals("Ajce@123")) {
                     Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT).show();
-                } else if (uname.equals("reshma@gmail.com") && pswd != ("Reshma@123")) {
+                } else if (uname.equals("ajce@gmail.com") && pswd != ("Ajce@123")) {
                     Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Invalid username and password", Toast.LENGTH_SHORT).show();
